@@ -1,263 +1,259 @@
-[index.html](https://github.com/user-attachments/files/29487464/index.html)
-# Felix-Lahann.github.io<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felix Lahann — Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+[script.js](https://github.com/user-attachments/files/29487496/script.js)
 
-<!-- Navigation -->
-<nav id="navbar">
-    <div class="nav-container">
-        <a href="#hero" class="nav-logo">FL</a>
-        <button class="nav-toggle" aria-label="Toggle menu">
-            <span></span><span></span><span></span>
-        </button>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#writing">Writing</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const links = document.querySelectorAll('.nav-links a');
 
-<!-- Hero -->
-<section id="hero">
-    <div class="hero-content">
-        <p class="hero-greeting">Hi, I'm</p>
-        <h1 class="hero-name">Felix Lahann</h1>
-        <p class="hero-tagline">Student · Builder · Creator</p>
-        <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-        </div>
-    </div>
-</section>
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
 
-<!-- About -->
-<section id="about" class="section">
-    <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-grid">
-            <div class="about-photo">
-                <img src="assets/DSC_9212 (2).jpg" alt="Felix Lahann" class="profile-photo">
-            </div>
-            <div class="about-text">
-                <p>I'm Felix Lahann, a student at the University of Michigan studying Economics and Data Science. I'm drawn to data-driven problem-solving, human behavior, and organizational leadership — and I love exploring the intersections of psychology, economics, computer science, and philosophy to understand how people make decisions and how systems can better serve communities.</p>
-                <p>Across my roles in tech, leadership development, and community-based work, I bring clarity, empathy, and analytical thinking to every project. I'm particularly energized by work that strengthens equity, enhances collaboration, and uses data to inform real-world solutions.</p>
-                <p>I'm always eager to connect with professionals and organizations working at the intersection of analytics, economic development, innovation, and social impact.</p>
-                <div class="about-details">
-                    <div class="detail"><span class="detail-label">Location</span><span>Ann Arbor, MI</span></div>
-                    <div class="detail"><span class="detail-label">University</span><span>University of Michigan</span></div>
-                    <div class="detail"><span class="detail-label">Email</span><span>flahann@umich.edu</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    toggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+    });
 
-<!-- Experience -->
-<section id="experience" class="section section-alt">
-    <div class="container">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">May 2026 — Present · 2 mos</span>
-                    <h3>Applied Leadership Fellow - Lead</h3>
-                    <h4>University of Michigan Barger Leadership Institute · Part-time · On-site</h4>
-                    <p class="timeline-location">Ann Arbor, Michigan, United States</p>
-                    <ul class="timeline-highlights">
-                        <li><strong>Mentorship & Team Support:</strong> Provide strategic guidance and mentorship to multiple Applied Leadership Fellow (ALF) teams, ensuring project alignment with organizational goals and student success.</li>
-                        <li><strong>Cross-Team Collaboration:</strong> Facilitate communication and collaboration between various internal teams to streamline student-facing initiatives and enhance the impact of campus-wide events.</li>
-                        <li><strong>Curriculum Facilitation:</strong> Co-design and co-facilitate weekly leadership seminars, leading discussions on diverse leadership theories, professional development, and practical problem-solving for fellows.</li>
-                        <li><strong>Program Oversight:</strong> Selected as a returning fellow to oversee peer initiatives, fostering a collaborative environment that promotes student agency and leadership growth within the University of Michigan community.</li>
-                    </ul>
-                    <span class="timeline-tenure">Part-time · 2 yrs 3 mos total at BLI</span>
-                </div>
-            </div>
+    links.forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
 
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">May 2026 — Present · 2 mos</span>
-                    <h3>Benefits Consulting Intern</h3>
-                    <h4>Hylant · Internship · On-site</h4>
-                    <p class="timeline-location">Ann Arbor, Michigan, United States</p>
-                    <p>Selected for Hylant's Summer 2026 internship program to support the Employee Benefits consulting team. Leveraging a background in Economics and Data Science to help corporate clients optimize their healthcare spend and navigate the complexities of employee benefits.</p>
-                </div>
-            </div>
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                links.forEach(l => l.classList.remove('active'));
+                const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, { threshold: 0.3 });
 
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">Apr 2026 — Present · 3 mos</span>
-                    <h3>Research Assistant</h3>
-                    <h4>University of Michigan · Part-time · On-site</h4>
-                    <p class="timeline-location">Ann Arbor, Michigan, United States</p>
-                    <p>Working with Professor Ram Mahalingam on research regarding mindfulness, emotional regulation, and wellbeing. Utilizing R and Excel to visualize trends and run regression analyses based on qualitative and quantitative data points collected.</p>
-                </div>
-            </div>
+    sections.forEach(s => observer.observe(s));
+});
 
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">Aug 2025 — Present · 11 mos</span>
-                    <h3>Partnership Development Fellow</h3>
-                    <h4>University of Michigan - Center for Academic Innovation · Internship · On-site</h4>
-                    <p class="timeline-location">United States</p>
-                    <p>Helps grow and manage relationships with academic units and external organizations to advance online learning and innovation. Researches prospects, crafts outreach and proposals, coordinates pilots and agreements, and keeps the partnership pipeline organized with clear data, timelines, and follow-ups.</p>
-                    <span class="timeline-tenure">Internship · 1 yr 2 mos total at CAI</span>
-                </div>
-            </div>
+:root {
+    --dark-teal: #354D59;
+    --tan: #CDBAA0;
+    --cream: #ECEAD9;
+    --mint: #6EBA9A;
+    --dark-teal-90: rgba(53, 77, 89, 0.9);
+    --white: #fff;
+    --text: #2a2a2a;
+    --text-light: #5a5a5a;
+}
 
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">May 2025 — Jul 2025 · 3 mos</span>
-                    <h3>Workforce Development Intern</h3>
-                    <h4>University of Michigan - Center for Academic Innovation · Internship · On-site</h4>
-                    <p class="timeline-location">Ann Arbor Charter Township, Michigan, United States</p>
-                    <ul class="timeline-highlights">
-                        <li>Led the design and facilitation of a four-week professional development cohort for student interns.</li>
-                        <li>Managed end-to-end project operations including onboarding, communications, and engagement strategy.</li>
-                        <li>Collaborated with staff and stakeholders to launch the experience, incorporating Michigan Online content and learner feedback.</li>
-                        <li>Strengthened skills in program management, stakeholder engagement, and user-centered design.</li>
-                    </ul>
-                </div>
-            </div>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <span class="timeline-date">Jan 2025 — Apr 2026 · 1 yr 4 mos</span>
-                    <h3>Data Analyst</h3>
-                    <h4>Michigan Data Science Team · Part-time · On-site</h4>
-                    <p class="timeline-location">Ann Arbor, Michigan, United States</p>
-                    <p>Michigan Data Science Team (MDST) is a student organization dedicated to cultivating data science talent at the University of Michigan by educating members in practical data science and machine learning and promoting their professional growth.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+html { scroll-behavior: smooth; }
 
-<!-- Projects -->
-<section id="projects" class="section">
-    <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card project-card-wide">
-                <div class="project-embed">
-                    <iframe src="https://umich-my.sharepoint.com/:p:/g/personal/flahann_umich_edu/IQD92l7CB34LS5zXxZo2iasNARcwFrd2Y-KJ_6HlQEiFwOg?e=H5FMVr&action=embedview" title="Unpaved Trail Usage Analysis"></iframe>
-                </div>
-                <div class="project-info">
-                    <h3>Unpaved Trail Usage in Michigan</h3>
-                    <p>An analytical deep-dive into how people use unpaved trails across Michigan. Using Tableau for interactive data visualization and R for statistical analysis, this project explores usage patterns, trail preferences, and trends to inform better trail planning and resource allocation.</p>
-                    <div class="project-tags">
-                        <span class="tag">Tableau</span>
-                        <span class="tag">R</span>
-                        <span class="tag">Data Analysis</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://umich-my.sharepoint.com/:p:/g/personal/flahann_umich_edu/IQD92l7CB34LS5zXxZo2iasNARcwFrd2Y-KJ_6HlQEiFwOg?e=H5FMVr" target="_blank" rel="noopener" class="project-link">View Full Presentation ↗</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card project-card-wide">
-                <div class="project-embed">
-                    <iframe src="https://umich-my.sharepoint.com/:p:/g/personal/flahann_umich_edu/IQDxE1kWcQOoQbz9q00HbUdhAW_iybjKZHF3UONaA3SPlcg?e=W2b44r&action=embedview" title="Visualizing Michigan Basketball"></iframe>
-                </div>
-                <div class="project-info">
-                    <h3>Visualizing Michigan Basketball: Power, Performance, and Popularity</h3>
-                    <p>A data visualization project exploring March Madness basketball through multiple analytical lenses — examining team power rankings, player performance metrics, and fan popularity trends using interactive dashboards and statistical analysis.</p>
-                    <div class="project-tags">
-                        <span class="tag">Tableau</span>
-                        <span class="tag">Excel</span>
-                        <span class="tag">R</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://umich-my.sharepoint.com/:p:/g/personal/flahann_umich_edu/IQDxE1kWcQOoQbz9q00HbUdhAW_iybjKZHF3UONaA3SPlcg?e=W2b44r" target="_blank" rel="noopener" class="project-link">View Full Presentation ↗</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card project-card-wide">
-                <div class="project-embed">
-                    <iframe src="https://docs.google.com/presentation/d/1t9NX7-vH2d7PC1XcvKbZeFKPOczHH7EpR1uWBIwyfm4/embed?start=false&loop=false&delayms=3000" title="Automating Data Visualization for Cohort Updates"></iframe>
-                </div>
-                <div class="project-info">
-                    <h3>Automating Data Visualization for Cohort Updates</h3>
-                    <p>Built at the Center for Academic Innovation to solve the challenge of manual, time-intensive progress reporting with no effective way to visualize pacing. Designed an automated data pipeline using JavaScript to replace manual data pulls, proposing an interactive dashboard that would allow partners to track employee pacing in real time — shifting away from static PDFs and email-based reporting toward a scalable, low-maintenance system.</p>
-                    <div class="project-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Data Pipelines</span>
-                        <span class="tag">Dashboard Design</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://docs.google.com/presentation/d/1t9NX7-vH2d7PC1XcvKbZeFKPOczHH7EpR1uWBIwyfm4/edit?usp=sharing" target="_blank" rel="noopener" class="project-link">View Full Presentation ↗</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    line-height: 1.6;
+}
 
-<!-- Resume -->
-<section id="resume" class="section section-alt">
-    <div class="container">
-        <h2 class="section-title">Resume</h2>
-        <div class="resume-container">
-            <div class="resume-actions">
-                <a href="assets/resume.pdf" download class="btn btn-primary">⬇ Download Resume</a>
-                <p class="resume-hint">You can also view it inline below</p>
-            </div>
-            <div class="resume-viewer">
-                <iframe src="assets/resume.pdf" title="Resume"></iframe>
-                <div class="resume-fallback">
-                    <p>PDF preview not available in your browser.</p>
-                    <a href="assets/resume.pdf" download class="btn btn-primary">Download Instead</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
-<!-- Writing / Substack -->
-<section id="writing" class="section">
-    <div class="container">
-        <h2 class="section-title">Writing</h2>
-        <p class="section-subtitle">Articles and essays from my Substack</p>
-        <div class="substack-card">
-            <div class="substack-card-icon">✍️</div>
-            <h3>Felix Lahann on Substack</h3>
-            <a href="https://substack.com/@xilef789" target="_blank" rel="noopener" class="btn btn-primary">Visit My Substack ↗</a>
-        </div>
-    </div>
-</section>
+a { text-decoration: none; color: inherit; }
 
-<!-- Contact -->
-<section id="contact" class="section section-alt">
-    <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="contact-text">I'm always open to new opportunities, collaborations, or just a good conversation. Feel free to reach out!</p>
-        <div class="contact-links">
-            <a href="mailto:flahann@umich.edu" class="btn btn-primary">Email Me</a>
-            <a href="https://www.linkedin.com/in/felix-lahann-075993288/" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn ↗</a>        </div>
-    </div>
-</section>
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-<footer>
-    <p>&copy; 2026 Felix Lahann. All rights reserved.</p>
-</footer>
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    cursor: pointer;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-primary { background: var(--mint); color: var(--dark-teal); }
+.btn-primary:hover { background: #5dab88; }
+.btn-secondary { background: transparent; border: 2px solid var(--dark-teal); color: var(--dark-teal); }
+.btn-secondary:hover { background: var(--dark-teal); color: var(--cream); }
 
-<script src="script.js"></script>
-</body>
-</html>
+/* Navbar */
+#navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--dark-teal-90);
+    backdrop-filter: blur(10px);
+    transition: box-shadow 0.3s;
+}
+#navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.15); }
+.nav-container {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem;
+}
+.nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--mint);
+}
+.nav-links { display: flex; list-style: none; gap: 2rem; }
+.nav-links a {
+    color: var(--cream); font-size: 0.9rem; font-weight: 400;
+    position: relative; transition: color 0.2s;
+}
+.nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: var(--mint); transition: width 0.3s;
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a:hover { color: var(--mint); }
+
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); transition: 0.3s; }
+
+/* Hero */
+#hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--dark-teal) 0%, #2a3d47 100%);
+    text-align: center; padding: 2rem;
+}
+.hero-greeting { color: var(--mint); font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.hero-name { color: var(--cream); font-size: clamp(2.5rem, 7vw, 5rem); margin-bottom: 0.75rem; }
+.hero-tagline { color: var(--tan); font-size: 1.25rem; margin-bottom: 2.5rem; }
+.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* Sections */
+.section { padding: 6rem 0; }
+.section-alt { background: var(--white); }
+.section-title {
+    font-size: 2.2rem; text-align: center; margin-bottom: 1rem;
+    color: var(--dark-teal); position: relative; padding-bottom: 1rem;
+}
+.section-title::after {
+    content: ''; position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%); width: 60px; height: 3px;
+    background: var(--mint); border-radius: 2px;
+}
+.section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 2.5rem; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 3rem; align-items: start; margin-top: 3rem; }
+.profile-photo {
+    width: 280px; height: 320px; object-fit: cover; border-radius: 12px;
+}
+.about-text p { margin-bottom: 1rem; color: var(--text-light); font-size: 1.05rem; }
+.about-details { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+.detail { display: flex; gap: 1rem; }
+.detail-label { font-weight: 600; color: var(--dark-teal); min-width: 100px; }
+
+/* Timeline */
+.timeline { max-width: 700px; margin: 3rem auto 0; position: relative; padding-left: 2rem; }
+.timeline::before {
+    content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+    width: 2px; background: var(--tan);
+}
+.timeline-item { position: relative; margin-bottom: 2.5rem; }
+.timeline-marker {
+    position: absolute; left: -2rem; top: 0.3rem;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--mint); border: 3px solid var(--white);
+}
+.timeline-content { background: var(--cream); padding: 1.5rem; border-radius: 10px; }
+.timeline-date { font-size: 0.85rem; color: var(--mint); font-weight: 600; }
+.timeline-content h3 { font-size: 1.2rem; color: var(--dark-teal); margin: 0.25rem 0; }
+.timeline-content h4 { font-size: 0.95rem; color: var(--text-light); font-weight: 400; margin-bottom: 0.5rem; }
+.timeline-content p { font-size: 0.95rem; color: var(--text-light); }
+.timeline-location { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; }
+.timeline-highlights { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.timeline-highlights li { font-size: 0.9rem; color: var(--text-light); padding-left: 1rem; position: relative; }
+.timeline-highlights li::before { content: '▸'; position: absolute; left: 0; color: var(--mint); }
+.timeline-tenure { display: inline-block; margin-top: 0.75rem; font-size: 0.8rem; color: var(--tan); background: var(--dark-teal); padding: 0.2rem 0.75rem; border-radius: 20px; }
+
+/* Projects */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; }
+.project-card {
+    background: var(--white); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-card:hover { transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+.project-image {
+    height: 200px; background: var(--dark-teal);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--tan); font-size: 1rem;
+}
+.project-info { padding: 1.5rem; }
+.project-info h3 { font-size: 1.2rem; color: var(--dark-teal); margin-bottom: 0.5rem; }
+.project-info p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem; }
+.project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.tag {
+    padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;
+    background: rgba(110,186,154,0.15); color: var(--dark-teal); font-weight: 500;
+}
+.project-links { display: flex; gap: 1rem; }
+.project-link { font-size: 0.9rem; color: var(--mint); font-weight: 500; transition: color 0.2s; }
+.project-link:hover { color: var(--dark-teal); }
+.project-card-wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; }
+.project-embed { background: var(--dark-teal); }
+.project-embed iframe { width: 100%; height: 100%; min-height: 400px; border: none; }
+@media (max-width: 768px) { .project-card-wide { grid-template-columns: 1fr; } .project-embed iframe { min-height: 300px; } }
+
+/* Resume */
+.resume-container { text-align: center; margin-top: 2rem; }
+.resume-actions { margin-bottom: 2rem; }
+.resume-hint { color: var(--text-light); font-size: 0.9rem; margin-top: 0.75rem; }
+.resume-viewer { max-width: 800px; margin: 0 auto; position: relative; }
+.resume-viewer iframe { width: 100%; height: 800px; border: 2px solid var(--tan); border-radius: 10px; }
+.resume-fallback { display: none; padding: 3rem; background: var(--cream); border-radius: 10px; text-align: center; }
+
+/* Embeds */
+.embed-container { max-width: 800px; margin: 0 auto; position: relative; }
+.embed-container iframe { width: 100%; height: 600px; border: 2px solid var(--tan); border-radius: 10px; }
+.embed-overlay {
+    position: absolute; inset: 0; background: rgba(53,77,89,0.9);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; color: var(--cream); padding: 2rem; text-align: center;
+}
+.embed-overlay code { background: rgba(255,255,255,0.15); padding: 0.2rem 0.5rem; border-radius: 4px; }
+.substack-card {
+    max-width: 500px; margin: 0 auto; text-align: center;
+    background: var(--white); border: 2px solid var(--tan); border-radius: 12px;
+    padding: 3rem 2rem;
+}
+.substack-card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.substack-card h3 { color: var(--dark-teal); font-size: 1.4rem; margin-bottom: 0.75rem; }
+.substack-card p { color: var(--text-light); margin-bottom: 1.5rem; }
+.writing-sample-heading { font-size: 1.5rem; color: var(--dark-teal); text-align: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+.writing-sample { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto; text-align: center; }
+.writing-sample-info h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--dark-teal); margin-bottom: 0.5rem; }
+.writing-sample-info p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem; }
+.writing-sample-viewer iframe { width: 100%; height: 900px; border: 2px solid var(--tan); border-radius: 10px; }
+@media (max-width: 768px) { .writing-sample-viewer iframe { height: 600px; } }
+
+.podcast-embed { max-width: 800px; margin: 0 auto 1.5rem; position: relative; }
+.podcast-embed iframe { border-radius: 12px; }
+.podcast-embed .embed-overlay { border-radius: 12px; }
+.podcast-platforms { display: flex; gap: 1rem; justify-content: center; }
+
+/* Contact */
+#contact { text-align: center; }
+.contact-text { color: var(--text-light); font-size: 1.1rem; max-width: 500px; margin: 1.5rem auto 2rem; }
+.contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* Footer */
+footer {
+    text-align: center; padding: 2rem;
+    background: var(--dark-teal); color: var(--tan); font-size: 0.85rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+        display: none; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: var(--dark-teal);
+        padding: 1.5rem 2rem; gap: 1rem;
+    }
+    .nav-links.open { display: flex; }
+    .about-grid { grid-template-columns: 1fr; justify-items: center; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .timeline { padding-left: 1.5rem; }
+    .resume-viewer iframe { height: 500px; }
+    .embed-container iframe { height: 400px; }
+}
